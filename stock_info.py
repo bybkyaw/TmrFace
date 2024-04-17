@@ -3,16 +3,17 @@
 import yfinance as yf
 
 # Function to get live stock price
-# def get_live_stock_price(stock_code):
-#     try:
-#         stock = yf.Ticker(stock_code)
-#         live_price = stock.history(period='1d')['Close'].iloc[-1]
-#         return live_price
-#     except Exception as e:
-#         return None
+def get_live_stock_price(stock_code):
+    try:
+        stock = yf.Ticker(stock_code)
+        live_price = stock.history(period='1d')['Close'].iloc[-1]
+        return live_price
+    except Exception as e:
+        return None
 
 
 # Function to get additional stock information
+
 def get_stock_info(stock_code):
     try:
         stock = yf.Ticker(stock_code)
