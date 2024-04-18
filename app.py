@@ -1,8 +1,6 @@
-# app.py
-
 import streamlit as st
-from col_1_stock import display_col1
-from col_2_news import display_col2
+from stocks.col_1_stock import display_col1
+from news.col_2_news import display_col2
 
 # Streamlit UI setup
 st.set_page_config(page_title="TmrFace", page_icon="https://scalebranding.com/wp-content/uploads/2022/02/Duck-3.jpg", layout="wide")

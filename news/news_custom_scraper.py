@@ -4,7 +4,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 from textblob import TextBlob
-from sentiment_analysis import analyze_sentiment
+from news.sentiment_analysis import analyze_sentiment
 
 
 def scrape_custom_news(custom_url):
