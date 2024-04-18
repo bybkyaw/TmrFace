@@ -2,20 +2,14 @@
 
 from textblob import TextBlob
 
-# Function for sentiment analysis
 def analyze_sentiment(text):
-    
-    if text:
-        blob = TextBlob(text)
-        sentiment_score = blob.sentiment.polarity
 
-        if sentiment_score > 0:
-            return "positive"
-        
-        elif sentiment_score < 0:
-            return "negative"
-        
-        else:
-            return "neutral"
+    blob = TextBlob(text)
+    if blob.sentiment.polarity > 0:
+        return "positive"
+    
+    elif blob.sentiment.polarity < 0:
+        return "negative"
+    
     else:
-        return None
+        return "neutral"
