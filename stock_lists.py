@@ -1,4 +1,7 @@
-# stock_lists.py
+
+
+# # stock_lists.py
+
 
 # List of individual stocks
 all_stocks = [

@@ -1,22 +1,33 @@
-# plotting.py
+import yfinance as yf
+import plotly.graph_objects as go
 
-import plotly.express as px
-
-def plot_live_stock_chart(hist, stock_code):
+def plot_live_stock_chart(stock_code):
     try:
-        fig = px.line(hist, x=hist.index, y='Close', title=f"Live Price Chart for {stock_code}")
-        fig.update_traces(line=dict(color='blue'))  # Adjust line color
+        stock_data = yf.Ticker(stock_code)
+        hist = stock_data.history(period = "1d", interval = '1m')  
+        print(hist.head())  
+        print("Data columns:", hist.columns)  
+
+        if hist.empty:
+            print("No data retrieved.")
+            return None
+
+        # Create the plot with green line color
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x = hist.index, y = hist['Close'], mode = 'lines', name = 'Close Price', line = dict(color = 'lightblue')))
         fig.update_layout(
-            xaxis_title="Time",
-            yaxis_title="Price",
-            hovermode="x unified",
-            xaxis_rangeslider_visible=True,
-            xaxis=dict(
-                tickformat='%I:%M %p',  # Format for hours:minutes AM/PM
-                range=[hist.index[0], hist.index[-1]]  # Adjusted data range for x-axis
+            title = f"Live Price Chart for {stock_code}",
+            xaxis_title = "Time",
+            yaxis_title = "Price",
+            hovermode = "x unified",
+            xaxis_rangeslider_visible = True,
+            xaxis = dict(
+                tickformat='%I:%M %p',
+                range=[hist.index[0], hist.index[-1]] if not hist.index.empty else None
             )
         )
 
         return fig
     except Exception as e:
         print(f"Error plotting live stock chart: {e}")
+        return None

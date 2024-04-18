@@ -6,13 +6,13 @@ import yfinance as yf
 def get_live_stock_price(stock_code):
     try:
         stock = yf.Ticker(stock_code)
-        live_price = stock.history(period='1d')['Close'].iloc[-1]
+        hist = stock.history(period='1d')
+        print("Fetched historical data successfully:", hist)
+        live_price = hist['Close'].iloc[-1]
         return live_price
     except Exception as e:
+        print("Error fetching live stock price:", e)
         return None
-
-
-# Function to get additional stock information
 
 def get_stock_info(stock_code):
     try:

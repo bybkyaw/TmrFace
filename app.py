@@ -1,24 +1,34 @@
 # app.py
 
 import streamlit as st
-import stock_lists
 from col_1_stock import display_col1
 from col_2_news import display_col2
-from stock_lists import all_stocks, all_indices
 
 # Streamlit UI setup
-st.set_page_config(page_title="TmrFace", page_icon=":chart_with_upwards_trend:", layout="wide")
+st.set_page_config(page_title="TmrFace", page_icon="https://scalebranding.com/wp-content/uploads/2022/02/Duck-3.jpg", layout="wide")
 
 # Sidebar layout with padding around the logo
 st.sidebar.markdown(
-    '<div style="padding: 0px 0px 0px 80px;"><img src="TF_Logo.png" width="100" height="100"></div>', unsafe_allow_html=True)  # Logo with padding
+    '<div style="padding: 0px 0px 0px 80px;"><img src="https://res.cloudinary.com/dom4dgtnf/image/upload/fl_preserve_transparency/v1713396766/DUCK_hcyr07.jpg?_s=public-apps" width="100" height="100"></div>',
+    unsafe_allow_html=True
+)  # Logo with padding
+
 st.sidebar.markdown(
-    '<div style="padding: 0px 0px 0 80px;"><h1>TmrFace</h1></div>', unsafe_allow_html=True)
+    '<div style="padding: 0px 0px 0 80px;"><h1>TmrFace</h1></div>',
+    unsafe_allow_html=True
+)
 
-# Display columns
+# Create two columns for layout
 col1, col2 = st.columns([1, 1])
-with col1:
-    display_col1()
 
+# In column 1: Display live stock price and chart
+with col1:
+    selected_stock = display_col1()
+
+    # Store selected_stock in session state
+    st.session_state.selected_stock = selected_stock
+
+# In column 2: Display news about the stock
 with col2:
-    display_col2()
+    display_col2(st.session_state.selected_stock)
+
