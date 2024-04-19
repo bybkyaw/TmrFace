@@ -17,12 +17,6 @@ def get_live_stock_price(symbol):
     except:
         return None, None
     
-  
-import streamlit as st
-import requests
-from bs4 import BeautifulSoup
-from time import sleep
-import pandas as pd
 
 
 # Function to get live stock price and change
@@ -39,6 +33,7 @@ def get_live_stock_price(stock_code):
             # Get the last available closing price from the previous day
             yesterday = pd.Timestamp.now() - pd.Timedelta(days=1)
             hist_yesterday = stock.history(start=yesterday, end=yesterday)
+
             if len(hist_yesterday) > 0:
                 previous_close = hist_yesterday['Close'].iloc[-1]
                 price_change = live_price - previous_close

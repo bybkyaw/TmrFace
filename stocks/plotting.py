@@ -1,6 +1,8 @@
 import yfinance as yf
 import plotly.graph_objects as go
 
+
+
 def plot_live_stock_chart(stock_code):
     try:
         stock_data = yf.Ticker(stock_code)
