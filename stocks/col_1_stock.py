@@ -2,13 +2,15 @@
 
 import streamlit as st
 import yfinance as yf
+import plotly.graph_objs as go
 from news.col_2_news import display_col2
 from stocks.stock_lists import all_stocks, all_indices
-from stocks.stock_forecasting import forecast_stock_prices
+from stocks.stock_forecasting import forecast_stock_prices, forecast_stock_prices_1_week
 from stocks.stock_info import get_live_stock_price
 from stocks.stock_info_display import display_stock_info  
 from stocks.plotting import plot_live_stock_chart
-from stocks.plotting_pred import plot_prediction_chart
+from stocks.plotting_pred import plot_prediction_chart, calculate_heikin_ashi, plot_heikin_ashi
+from stocks.stock_forecasting import forecast_stock_prices_1_week
 
 # Define selected_stock as global variable
 selected_stock = "NVDA"
@@ -19,7 +21,7 @@ def display_col1():
 
     # Sidebar layout with padding around the logo
     st.header("Live Stock Price and Chart")
-    selected_stock = st.sidebar.selectbox('Select a stock', options = all_stocks + all_indices)
+    selected_stock = st.sidebar.selectbox('Select a stock', options=all_stocks + all_indices)
 
     
     # Display live stock price
@@ -48,12 +50,54 @@ def display_col1():
         if forecast is not None:
             st.write(f"## Forecast for {selected_stock}")
             fig1 = plot_prediction_chart(forecast, selected_stock)  # Use plot_prediction_chart
-            st.plotly_chart(fig1, use_container_width = True)
+            st.plotly_chart(fig1, use_container_width=True)
         else:
             st.error("Unable to fetch data for the selected stock.")
 
-    return selected_stock
+        forecast, model = forecast_stock_prices_1_week(selected_stock)
 
+
+
+        # st.markdown("<hr>", unsafe_allow_html=True)
+
+        # if forecast is not None:
+        #     st.write(f"## One week Forecast for {selected_stock}")
+        #     st.error("Unable to fetch data for the selected stock.")
+        # else:
+        #     st.write(f"## Heikin Ashi Chart for {selected_stock}")
+        #     hist = yf.download(selected_stock, period='1mo', interval='1d')
+        
+        # if not hist.empty:
+        #     ha_df = calculate_heikin_ashi(hist)
+        #     fig_ha = plot_heikin_ashi(ha_df)
+        #     st.plotly_chart(fig_ha)
+        # else:
+        #     st.error("Failed to download historical data for Heikin Ashi chart.")
+
+
+        # if forecast is not None:
+        #     st.write(f"## One week Forecast for {selected_stock}")
+        #     fig1 = plot_prediction_chart(forecast, selected_stock)  # Use plot_prediction_chart
+        #     st.plotly_chart(fig1, use_container_width=True)
+        # else:
+        #     st.error("Unable to fetch data for the selected stock.")
+
+
+
+        st.markdown("<hr>", unsafe_allow_html=True)
+
+        st.header(f'One Week Forecast for {selected_stock}')
+
+        hist = yf.download(selected_stock, period='1mo', interval='1d')
+
+        if not hist.empty:
+            ha_df = calculate_heikin_ashi(hist)
+            fig_ha = plot_heikin_ashi(ha_df)
+            st.plotly_chart(fig_ha)
+        else:
+            st.error("Failed to download historical data for Heikin Ashi chart.")
+
+    return selected_stock
 
 
 

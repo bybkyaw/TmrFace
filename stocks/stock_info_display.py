@@ -17,3 +17,6 @@ def display_stock_info(selected_stock, hist):
             # Display historical data
             st.markdown(f"### Today  <span style='color:lightblue'>{selected_stock}</span> Data", unsafe_allow_html=True)
             st.write(hist)
+
+
+

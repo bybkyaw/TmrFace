@@ -7,7 +7,7 @@ import streamlit as st
 from news.sentiment_analysis import analyze_sentiment
 from news.news_scraper import scrape_general_news, scrape_stock_news
 from stocks.stock_lists import all_stocks, all_indices
-from news.news_custom_scraper import scrape_custom_news, scrape_custom_news_with_keywords
+from news.news_custom_scraper import scrape_custom_news, scrape_custom_news_with_keywords, find_sentences_with_keywords
 
 
 # Your Finnhub API key
@@ -45,8 +45,9 @@ def display_col2(selected_stock):
             sentiment = analyze_sentiment(news['text'])
             color = "#ADD8E6" if sentiment == "positive" else "#F08080" if sentiment == "negative" else "#D3D3D3"
             limited_text = limit_sentences1(news['text'])
-            st.markdown(f"<p style='color: {color};'>- {limited_text}</p>", unsafe_allow_html=True)
-  
+            st.markdown(f"- <p style='color: {color};'> {limited_text}</p>", unsafe_allow_html=True)
+
+    
     # Scrape and display general news for all stocks in bullet points
     general_news = scrape_general_news()
 
@@ -83,14 +84,32 @@ def display_col2(selected_stock):
             custom_news = scrape_custom_news_with_keywords(custom_url, keywords)
             if custom_news:
                 st.write("Scraped Text:")
-                for news in custom_news:
-                    st.write(news['text'])
+                for news in custom_news[:3]:  # Limit to maximum 3 articles
+                    sentences = find_sentences_with_keywords(news['text'], keywords)
+                    for sentence in sentences:
+                        st.markdown(f"- {sentence}")  # Display each sentence as a bullet point
             else:
                 st.warning("Failed to scrape custom news.")
         else:
             st.warning("Please enter a URL to scrape.")
-    else:
-        st.warning("No stock selected.")
+
+    # st.subheader("Scrape Custom URL with Keywords")
+    # custom_url = st.text_input("Enter URL to scrape:")
+    # keywords = st.text_input("Enter keywords (comma-separated):")
+
+    # if st.button("Scrape"):
+    #     if custom_url:
+    #         custom_news = scrape_custom_news_with_keywords(custom_url, keywords)
+    #         if custom_news:
+    #             st.write("Scraped Text:")
+    #             for news in custom_news:
+    #                 st.write(news['text'])
+    #         else:
+    #             st.warning("Failed to scrape custom news.")
+    #     else:
+    #         st.warning("Please enter a URL to scrape.")
+    # else:
+    #     st.warning("No stock selected.")
 
 
 

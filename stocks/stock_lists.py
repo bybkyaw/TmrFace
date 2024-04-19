@@ -113,3 +113,8 @@ all_indices = [
     "^N225"   # Nikkei 225
 ]
 
+top_trending_stocks_list = [
+
+    "^DJI", "^GSPC", "^IXIC", "^FTSE", "^SSMI", "^HSI"
+
+]
