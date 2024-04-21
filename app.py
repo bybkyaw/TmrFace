@@ -76,7 +76,7 @@ def display_trending_stocks():
         live_price, price_change = get_live_stock_price(stock['symbol'])
 
         if live_price is not None:
-            price_display = f"<span style='color:blue;'>[${live_price:.2f}]</span>"
+            price_display = f"<span style='color:#90B1DB;'>[${live_price:.2f}]</span>"
             if price_change > 0:
                 change_display = f"<span style='color:green;'>[-{price_change:.2f}]</span>"
             elif price_change < 0:
