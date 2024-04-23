@@ -55,7 +55,11 @@ def get_live_stock_price(stock_code):
 
 #Display function in the sidebar with color-coded changes
 def display_trending_stocks():
-    st.sidebar.markdown("## Top Trending Stocks")
+    st.sidebar.markdown("<h1 style='color:#4BB0FF;'>Top Trending Stocks</h1>", unsafe_allow_html=True)
+
+    st.sidebar.markdown("&nbsp;") 
+    st.markdown("<hr>", unsafe_allow_html=True)
+
     trending_stocks = get_trending_stocks()  # Ensure this is fetching the correct data
 
     # Create placeholders for live price display
