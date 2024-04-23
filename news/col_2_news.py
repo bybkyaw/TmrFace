@@ -93,23 +93,7 @@ def display_col2(selected_stock):
         else:
             st.warning("Please enter a URL to scrape.")
 
-    # st.subheader("Scrape Custom URL with Keywords")
-    # custom_url = st.text_input("Enter URL to scrape:")
-    # keywords = st.text_input("Enter keywords (comma-separated):")
-
-    # if st.button("Scrape"):
-    #     if custom_url:
-    #         custom_news = scrape_custom_news_with_keywords(custom_url, keywords)
-    #         if custom_news:
-    #             st.write("Scraped Text:")
-    #             for news in custom_news:
-    #                 st.write(news['text'])
-    #         else:
-    #             st.warning("Failed to scrape custom news.")
-    #     else:
-    #         st.warning("Please enter a URL to scrape.")
-    # else:
-    #     st.warning("No stock selected.")
+   
 
 
 

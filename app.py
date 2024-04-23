@@ -38,7 +38,6 @@ with col1:
     st.markdown("<hr>", unsafe_allow_html=True)
 
 
-
 # In column 2: Display news about the stock
 with col2:
     display_col2(st.session_state.selected_stock)
