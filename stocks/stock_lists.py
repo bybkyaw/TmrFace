@@ -9,7 +9,7 @@ all_stocks = [
     "MSFT",   # Microsoft Corporation
     "AMZN",   # Amazon.com Inc.
     "GOOGL",  # Alphabet Inc. (Google)
-    "FB",     # Meta Platforms Inc. (Facebook)
+    "META",     # Meta Platforms Inc. (Facebook)
     "TSLA",   # Tesla, Inc.
     "BRK.A",  # Berkshire Hathaway Inc. Class A
     "JPM",    # JPMorgan Chase & Co.

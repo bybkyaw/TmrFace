@@ -17,14 +17,14 @@ def get_trending_stocks():
     trending_stocks = []
 
     if table:
-        rows = table.find_all('tr')[1:]  # Skipping the header row
+        rows = table.find_all('tr')[1:]  
         for row in rows:
             cols = row.find_all('td')
             symbol = cols[0].text.strip()
             name = cols[1].text.strip()
             current_price = get_live_stock_price(symbol)
             trending_stocks.append({'symbol': symbol, 'name': name, 'current_price': current_price})
-            if len(trending_stocks) == 10:
+            if len(trending_stocks) == 15:
                 break
 
     return trending_stocks
@@ -34,16 +34,16 @@ def get_trending_stocks():
 def get_live_stock_price(stock_code):
     try:
         stock = yf.Ticker(stock_code)
-        # Getting the last 2 days to ensure we have a previous close in case of missing data
+        
         hist = stock.history(period='2d')
         if len(hist) < 1:
-            return None, None  # In case no data is returned
+            return None, None  
 
         live_price = hist['Close'].iloc[-1]
         if len(hist['Close']) > 1:
             previous_close = hist['Close'].iloc[-2]
         else:
-            # If we only have one day of data, no change can be calculated
+            
             previous_close = live_price
 
         price_change = live_price - previous_close

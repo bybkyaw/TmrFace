@@ -14,7 +14,7 @@ st.set_page_config(page_title="TmrFace", page_icon="https://scalebranding.com/wp
 
 # Sidebar layout with padding around the logo
 st.sidebar.markdown(
-    '<div style="padding: 0px 0px 0px 80px;"><img src="https://res.cloudinary.com/dom4dgtnf/image/upload/fl_preserve_transparency/v1713396766/DUCK_hcyr07.jpg?_s=public-apps" width="100" height="100"></div>',
+    '<div style="padding: 0px 0px 0px 80px;"><img src="https://scalebranding.com/wp-content/uploads/2022/02/Duck-3.jpg" width="100" height="100"></div>',
     unsafe_allow_html=True
 )  # Logo with padding
 
