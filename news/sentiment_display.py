@@ -71,7 +71,6 @@ def display_sentiment_scores_dropdown(displayed_news):
 
 
 
-
 def display_text_count_dropdown(general_news):
     if general_news:
         st.header("Scrapped Articles Text Count")
