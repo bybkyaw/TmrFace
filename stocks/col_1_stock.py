@@ -10,10 +10,7 @@ from stocks.stock_info_display import display_stock_info
 from stocks.plotting import plot_live_stock_chart
 from datetime import datetime, timedelta
 from stocks.plotting_pred import plot_prediction_chart, calculate_heikin_ashi, plot_heikin_ashi, plot_candlestick_chart
-# from stocks.RainDrop import plot_raindrop, fetch_stock_data, prepare_raindrop_data
 
-# Define selected_stock as global variable
-selected_stock = "NVDA"
 
 # Main function for column 1 - live stock price, chart, and forecast
 def display_col1():
